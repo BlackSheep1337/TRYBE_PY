@@ -1,15 +1,16 @@
 PI = 3.14
 
 def square(side):
-    return print(side * side + PI)
+    return side * side
 
 
 def rectangle(length, width):
-    return print(length * width / PI)
+    return length * width
 
 def circle(radius):
-    return print(PI * radius * radius)
+    return PI * radius * radius
 
-square(10)
-rectangle(30, 30)
-circle(30)
+if __name__ == "__main__":
+    print("Área do quadrado:", square(10))
+    print("Área do retângulo:", rectangle(2, 2))
+    print("Área do círculo:", circle(3))
