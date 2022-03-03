@@ -1,0 +1,5 @@
+Lamborguine
+BMW
+WOLSHWAGEN
+MITSUBSH
+['Lamborguine\n', 'BMW\n', 'WOLSHWAGEN\n', 'MITSUBSH\n']

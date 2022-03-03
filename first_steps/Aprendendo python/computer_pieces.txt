@@ -1,0 +1,4 @@
+Graphic card
+Monitor
+Keyboard
+Mouse
