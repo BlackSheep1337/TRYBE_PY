@@ -1,3 +1,6 @@
+import smtplib
+import ssl
+
 class User:
     def __init__(self, name, email, password):
         self.name = name
@@ -5,21 +8,45 @@ class User:
         self.password = password
 
     def reset_password(self):
-        print(f"Enviando email para {self.email}")
+        meu_mailer = Mailer("password_reset@teste.com", "myverysafepassword", self.email)
+        meu_mailer.send_email("Reset your password", "Instruções para resetar a senha, com o link de resetar")
 
-ines = User("Ines", "ines2020@gmail.com", "ines1997")
 
-alexandre = User("Ale", "eskalo@gmail.com", "eskalo123")
+class Mailer:
+    def __init__(self, from_email, from_password, to_email):
+        self.from_email = from_email
+        self.from_password = from_password
+        self.to_email = to_email
 
-ines.reset_password()
+    def send_email(self, subject, message):
+        body = f"Subject:{subject}\n\n{message}".encode('utf-8')
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(
+            "smtp.gmail.com", 465, context=context
+        ) as server:
+            server.login(self.from_email, self.from_password)
+            try:
+                server.sendmail(self.from_email, self.to_email, body)
+            except (smtplib.SMTPRecipientsRefused, smtplib.SMTPSenderRefused):
+                raise ValueError
 
-alexandre.reset_password()
 
-print(ines)
-print(alexandre)
-print(ines.name)
-print(ines.email)
-print(alexandre.password)
+meu_user = User("Valentino Trocatapa", "valentino@tinytoons.com", "Grana")
+meu_user.reset_password()
+
+# ines = User("Ines", "ines2020@gmail.com", "ines1997")
+
+# alexandre = User("Ale", "eskalo@gmail.com", "eskalo123")
+
+# ines.reset_password()
+
+# alexandre.reset_password()
+
+# print(ines)
+# print(alexandre)
+# print(ines.name)
+# print(ines.email)
+# print(alexandre.password)
 
 """
     Na Programação Orientada a Objeto muitas coisas tem nome, e é importante sabermos quais são
