@@ -19,7 +19,23 @@
 
 from parsel import Selector
 import requests
+from pymongo import MongoClient
 
+client = MongoClient()
+
+db = client.catalogue
+
+book = {
+    "title": "A Light in the Attic",
+}
+
+document_id = db.books.insert_one(book).inserted_id
+
+print(document_id)
+
+print(db.books.find_one())
+
+client.close()
 
 # Define a primeira página como próxima a ter seu conteúdo recuperado
 URL_BASE = "http://books.toscrape.com/catalogue/"
