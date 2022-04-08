@@ -9,8 +9,6 @@ selector = Selector(text=response.text)
 # print(response.text)
 
 #2
-response = requests.get('https://api.github.com/users')
-users = response.json()
+response = requests.get('https://api.github.com/users').json()
 
-for user in users:
-    print(f"{user['login']} - {user['url']}")
+for user in response: print(f"{user['login']} - {user['url']}")
